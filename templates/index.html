@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplier Onboarding TAT Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --google-blue: #1a73e8;
+            --google-red: #db4437;
+            --google-yellow: #f4b400;
+            --google-green: #0f9d58;
+            --google-grey: #5f6368;
+            --google-light-grey: #f1f3f4;
+            --google-dark-grey: #202124;
+            --google-white: #ffffff;
+            --google-card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            --google-card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.2);
+            --gradient-blue-green: linear-gradient(135deg, #1a73e8, #0f9d58);
+        }
+
+        * {
+            font-size: 16px;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Cambria", serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: var(--google-dark-grey);
+            line-height: 1.5;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: var(--google-white);
+            padding: 8px 20px;
+            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.1);
+            border-radius: 8px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            margin: 8px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .google-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .google-logo span {
+            font-size: 25px;
+            font-weight: 700;
+            display: inline-block;
+            animation: float-logo 5s infinite ease-in-out;
+        }
+
+        .google-logo .g {
+            color: var(--google-blue);
+            animation-delay: 0s;
+        }
+        .google-logo .o1 {
+            color: var(--google-red);
+            animation-delay: 0.1s;
+        }
+        .google-logo .o2 {
+            color: var(--google-yellow);
+            animation-delay: 0.2s;
+        }
+        .google-logo .g2 {
+            color: var(--google-blue);
+            animation-delay: 0.3s;
+        }
+        .google-logo .l {
+            color: var(--google-green);
+            animation-delay: 0.4s;
+        }
+        .google-logo .e {
+            color: var(--google-red);
+            animation-delay: 0.5s;
+        }
+
+        .header-title-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 2px;
+            font-size: 20px;
+        }
+        .header-title-container > h1 {
+            font-size: 25px;
+        }
+
+        h1 {
+            font-family: Cambria, serif;
+            font-size: 20px;
+            color: var(--google-blue);
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+            transition: all 0.3s;
+        }
+
+        h2 {
+            font-family: Cambria, serif;
+            font-size: 14px;
+            color: var(--google-dark-grey);
+            font-weight: 400;
+            opacity: 0.85;
+            animation: fadeIn 0.5s ease 0.2s;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            flex-direction: column;
+            padding: 12px;
+        }
+
+        .overall-metrics {
+            background: var(--google-white);
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: var(--google-card-shadow);
+            margin-bottom: 12px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 12px;
+            border-radius: 4px;
+            background: var(--google-light-grey);
+        }
+
+        .metric-card h3 {
+            font-size: 14px;
+            color: var(--google-grey);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .trend-up {
+            color: var(--google-red);
+        }
+
+        .trend-down {
+            color: var(--google-green);
+        }
+
+        .table-container {
+            background: var(--google-white);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: var(--google-card-shadow);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .table-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--google-dark-grey);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .table-wrapper {
+            flex: 1;
+            overflow: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            position: relative;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background-color: #f1f3f4 !important;
+            z-index: 10;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: #f1f3f4;
+            font-weight: 500;
+            color: var(--google-dark-grey);
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .search-container {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #dadce0;
+            border-radius: 5px;
+            background: #fff;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .search-container i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--google-grey);
+            font-size: 12px;
+        }
+
+        .dropdown-list {
+            display: none;
+            position: absolute;
+            width: 100%;
+            max-height: 160px;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #dadce0;
+            border-radius: 0 0 5px 5px;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-list div {
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .dropdown-list div:hover {
+            background: #e8f0fe;
+        }
+
+        .mdc-button {
+            height: 36px;
+            border-radius: 18px;
+            font-weight: 500;
+            font-size: 12px;
+            background: var(--gradient-blue-green) !important;
+            color: white !important;
+            transition: all 0.3s;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .mdc-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .mdc-button__icon {
+            display: inline;
+            margin-right: 5px;
+            font-size: 12px;
+        }
+
+        .reset-button {
+            background: var(--google-light-grey) !important;
+            color: var(--google-grey) !important;
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: var(--google-dark-grey);
+            color: var(--google-white);
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            pointer-events: none;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--google-dark-grey) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 0.95;
+        }
+
+        .tooltip-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .tooltip-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tooltip-label {
+            font-weight: 500;
+        }
+
+        .tooltip-value {
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .overall-metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="google-logo">
+                    <span class="g">G</span>
+                    <span class="o1">o</span>
+                    <span class="o2">o</span>
+                    <span class="g2">g</span>
+                    <span class="l">l</span>
+                    <span class="e">e</span>
+                </div>
+                <div class="cognizant-logo">Cognizant</div>
+            </div>
+
+            <div class="header-title-container">
+                <h1>Supplier Onboarding TAT Dashboard</h1>
+                <h2>Compare weekly TAT metrics across suppliers</h2>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="overall-metrics" id="overallMetrics">
+                <div class="metric-card">
+                    <h3>Overall TAT</h3>
+                    <div class="metric-value" id="overallTat">-</div>
+                    <div id="overallTatTrend">No change</div>
+                </div>
+                <div class="metric-card">
+                    <h3>xWS Activation</h3>
+                    <div class="metric-value" id="xwsActivation">-</div>
+                    <div id="xwsActivationTrend">No change</div>
+                </div>
+                <div class="metric-card">
+                    <h3>System Activation</h3>
+                    <div class="metric-value" id="systemActivation">-</div>
+                    <div id="systemActivationTrend">No change</div>
+                </div>
+                <div class="metric-card">
+                    <h3>xWS to IDV</h3>
+                    <div class="metric-value" id="xwsToIdv">-</div>
+                    <div id="xwsToIdvTrend">No change</div>
+                </div>
+                <div class="metric-card">
+                    <h3>IDV to System</h3>
+                    <div class="metric-value" id="idvToSystem">-</div>
+                    <div id="idvToSystemTrend">No change</div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div class="table-header">
+                    <div class="table-title">
+                        <i class="fas fa-table"></i>
+                        <span>Supplier TAT Details</span>
+                    </div>
+                    <div class="table-actions">
+                        <div class="search-container">
+                            <input type="text" id="supplierSearch" placeholder="Search supplier..." autocomplete="off" />
+                            <i class="fas fa-search"></i>
+                            <div id="supplierDropdown" class="dropdown-list"></div>
+                        </div>
+                        <button class="mdc-button mdc-button--raised reset-button" id="resetButton">
+                            <span class="mdc-button__label">
+                                <i class="fas fa-redo mdc-button__icon"></i>
+                                Reset
+                            </span>
+                        </button>
+                        <button class="mdc-button mdc-button--raised" id="sortHighLow" style="background: var(--google-red) !important; font-size: 11px; height: 30px;">
+                            <span class="mdc-button__label">
+                                <i class="fas fa-sort-amount-down mdc-button__icon"></i>
+                                High to Low
+                            </span>
+                        </button>
+                        <button class="mdc-button mdc-button--raised" id="sortLowHigh" style="background: var(--google-green) !important; font-size: 11px; height: 30px;">
+                            <span class="mdc-button__label">
+                                <i class="fas fa-sort-amount-up mdc-button__icon"></i>
+                                Low to High
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-wrapper">
+                    <table id="supplierTable">
+                        <thead>
+                            <tr>
+                                <th>Supplier</th>
+                                <th>Total Onboarding</th>
+                                <th>Overall TAT</th>
+                                <th>xWS Activation</th>
+                                <th>System Activation</th>
+                                <th>xWS to IDV</th>
+                                <th>IDV to System</th>
+                            </tr>
+                        </thead>
+                        <tbody id="supplierTableBody">
+                            <!-- Table content will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script>
+        mdc.autoInit();
+
+        // Global variables
+        let allSuppliersData = [];
+
+        // Initialize on load
+        document.addEventListener("DOMContentLoaded", function() {
+            loadOverallMetrics();
+            loadSupplierTable();
+            setupSearchDropdown();
+            
+            // Event listeners
+            document.getElementById("sortHighLow").addEventListener("click", () => sortTable(true));
+            document.getElementById("sortLowHigh").addEventListener("click", () => sortTable(false));
+            document.getElementById("resetButton").addEventListener("click", resetDashboard);
+        });
+
+        // Load overall metrics
+        async function loadOverallMetrics() {
+            try {
+                const response = await fetch('/get_overall_metrics');
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                
+                // Update metric cards
+                updateMetricCard('overallTat', data.overall_tat);
+                updateMetricCard('xwsActivation', data.xws_activation);
+                updateMetricCard('systemActivation', data.system_activation);
+                updateMetricCard('xwsToIdv', data.xws_to_idv);
+                updateMetricCard('idvToSystem', data.idv_to_system);
+                
+            } catch (error) {
+                console.error('Error loading overall metrics:', error);
+            }
+        }
+
+        function updateMetricCard(elementId, value) {
+            const element = document.getElementById(elementId);
+            const trendElement = document.getElementById(elementId + 'Trend');
+            
+            if (value === undefined || value === null) {
+                element.textContent = '-';
+                trendElement.textContent = 'No data';
+                return;
+            }
+            
+            element.textContent = value.toFixed(2);
+            element.className = `metric-value ${value < 0 ? 'trend-down' : 'trend-up'}`;
+            
+            if (value > 0) {
+                trendElement.textContent = 'Increased';
+                trendElement.className = 'trend-up';
+            } else if (value < 0) {
+                trendElement.textContent = 'Decreased';
+                trendElement.className = 'trend-down';
+            } else {
+                trendElement.textContent = 'No change';
+                trendElement.className = '';
+            }
+        }
+
+        // Load supplier table data
+        async function loadSupplierTable() {
+            try {
+                const response = await fetch('/get_all_suppliers_data');
+                const data = await response.json();
+                
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+                
+                allSuppliersData = data;
+                updateTable(allSuppliersData);
+                
+            } catch (error) {
+                console.error('Error loading supplier data:', error);
+            }
+        }
+
+        // Update table with data
+        function updateTable(data) {
+            const tableBody = document.getElementById("supplierTableBody");
+            tableBody.innerHTML = "";
+            
+            data.forEach(item => {
+                const formatDiff = (value, current, previous) => {
+                    if (value === null || value === undefined) return '-';
+                    const numValue = Number(value);
+                    if (isNaN(numValue)) return '-';
+                    
+                    // Remove negative sign for green (improved) values
+                    const displayValue = numValue < 0 ? Math.abs(numValue).toFixed(2) : numValue.toFixed(2);
+                    const colorClass = numValue < 0 ? 'trend-down' : 'trend-up';
+                    return `
+                        <div class="tooltip">
+                            <span class="${colorClass}">${displayValue}</span>
+                            <span class="tooltiptext">
+                                <div class="tooltip-content">
+                                    <div class="tooltip-row">
+                                        <span class="tooltip-label">Current Week:</span>
+                                        <span class="tooltip-value">${current !== undefined ? current.toFixed(2) : '-'}</span>
+                                    </div>
+                                    <div class="tooltip-row">
+                                        <span class="tooltip-label">Previous Week:</span>
+                                        <span class="tooltip-value">${previous !== undefined ? previous.toFixed(2) : '-'}</span>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
+                    `;
+                };
+                
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${item.supplier}</td>
+                    <td>${item.total_onboarding}</td>
+                    <td>${formatDiff(item.overall_tat_diff, item.current_overall_tat, item.previous_overall_tat)}</td>
+                    <td>${formatDiff(item.xws_activation_diff, item.current_xws_activation, item.previous_xws_activation)}</td>
+                    <td>${formatDiff(item.system_activation_diff, item.current_system_activation, item.previous_system_activation)}</td>
+                    <td>${formatDiff(item.xws_to_idv_diff, item.current_xws_to_idv, item.previous_xws_to_idv)}</td>
+                    <td>${formatDiff(item.idv_to_system_diff, item.current_idv_to_system, item.previous_idv_to_system)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Sort table by Overall TAT
+        function sortTable(highToLow) {
+            const sortedData = [...allSuppliersData].sort((a, b) => {
+                const aValue = a.overall_tat_diff || 0;
+                const bValue = b.overall_tat_diff || 0;
+                return highToLow ? bValue - aValue : aValue - bValue;
+            });
+            updateTable(sortedData);
+        }
+
+        // Setup search dropdown
+        function setupSearchDropdown() {
+            const input = document.getElementById("supplierSearch");
+            const dropdown = document.getElementById("supplierDropdown");
+
+            input.addEventListener("input", async () => {
+                const searchTerm = input.value.toLowerCase();
+                try {
+                    const response = await fetch('/get_suppliers');
+                    const suppliers = await response.json();
+                    const filteredItems = suppliers.filter(item => 
+                        item.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    dropdown.innerHTML = "";
+                    if (filteredItems.length === 0) {
+                        const noResult = document.createElement("div");
+                        noResult.textContent = "No suppliers found";
+                        noResult.style.padding = "8px 12px";
+                        noResult.style.color = "var(--google-grey)";
+                        dropdown.appendChild(noResult);
+                    } else {
+                        filteredItems.forEach(item => {
+                            const option = document.createElement("div");
+                            option.textContent = item;
+                            option.addEventListener("click", () => {
+                                input.value = item;
+                                dropdown.style.display = "none";
+                                filterTable(item);
+                            });
+                            dropdown.appendChild(option);
+                        });
+                    }
+                    dropdown.style.display = filteredItems.length ? "block" : "none";
+                } catch (error) {
+                    console.error('Error filtering suppliers:', error);
+                }
+            });
+            
+            document.addEventListener("click", function(e) {
+                if (!e.target.closest(".search-container")) {
+                    dropdown.style.display = "none";
+                }
+            });
+        }
+
+        // Filter table by supplier
+        function filterTable(supplierName) {
+            if (!supplierName) {
+                updateTable(allSuppliersData);
+                return;
+            }
+            
+            const filteredData = allSuppliersData.filter(item => 
+                item.supplier.toLowerCase().includes(supplierName.toLowerCase())
+            );
+            updateTable(filteredData);
+        }
+
+        // Reset dashboard
+        function resetDashboard() {
+            document.getElementById("supplierSearch").value = "";
+            updateTable(allSuppliersData);
+        }
+    </script>
+</body>
+</html>
