@@ -61,44 +61,75 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 4px;
-        }
-
-        .google-logo {
+          }
+    
+          .google-logo {
             display: flex;
             align-items: center;
-        }
-
-        .google-logo span {
+          }
+    
+          .google-logo span {
             font-size: 25px;
             font-weight: 700;
             display: inline-block;
             animation: float-logo 5s infinite ease-in-out;
-        }
-
-        .google-logo .g {
+          }
+    
+          .google-logo .g {
             color: var(--google-blue);
             animation-delay: 0s;
-        }
-        .google-logo .o1 {
+          }
+          .google-logo .o1 {
             color: var(--google-red);
             animation-delay: 0.1s;
-        }
-        .google-logo .o2 {
+          }
+          .google-logo .o2 {
             color: var(--google-yellow);
             animation-delay: 0.2s;
-        }
-        .google-logo .g2 {
+          }
+          .google-logo .g2 {
             color: var(--google-blue);
             animation-delay: 0.3s;
-        }
-        .google-logo .l {
+          }
+          .google-logo .l {
             color: var(--google-green);
             animation-delay: 0.4s;
-        }
-        .google-logo .e {
+          }
+          .google-logo .e {
             color: var(--google-red);
             animation-delay: 0.5s;
-        }
+          }
+    
+          .handshake {
+            font-size: 16px;
+            color: var(--google-grey);
+            animation: pulse 2s infinite;
+          }
+    
+          .cognizant-logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #0033a1;
+            position: relative;
+          }
+    
+          .cognizant-logo::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gradient-blue-green);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+          }
+    
+          .cognizant-logo:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
 
         .header-title-container {
             width: 100%;
@@ -422,15 +453,18 @@
         <header>
             <div class="logo-container">
                 <div class="google-logo">
-                    <span class="g">G</span>
-                    <span class="o1">o</span>
-                    <span class="o2">o</span>
-                    <span class="g2">g</span>
-                    <span class="l">l</span>
-                    <span class="e">e</span>
+                  <span class="g">G</span>
+                  <span class="o1">o</span>
+                  <span class="o2">o</span>
+                  <span class="g2">g</span>
+                  <span class="l">l</span>
+                  <span class="e">e</span>
+                </div>
+                <div class="handshake">
+                  <i class="fas fa-handshake"></i>
                 </div>
                 <div class="cognizant-logo">Cognizant</div>
-            </div>
+              </div>
 
             <div class="header-title-container">
                 <h1>Supplier Onboarding TAT Dashboard</h1>
