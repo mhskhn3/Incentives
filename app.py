@@ -102,7 +102,11 @@ def get_overall_metrics():
             'idv_to_system': current_metrics['idv_to_system'] - previous_metrics['idv_to_system']
         }
         
-        return jsonify(differences)
+        return jsonify({
+            'differences': differences,
+            'current_metrics': current_metrics,
+            'previous_metrics': previous_metrics
+        })
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
