@@ -187,17 +187,32 @@
             padding: 12px;
             border-radius: 4px;
             background: var(--google-light-grey);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .metric-card h3 {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--google-grey);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
-        .metric-value {
-            font-size: 20px;
+        .metric-details {
+            font-size: 12px;
+            line-height: 1.2;
+            color: var(--google-dark-grey);
+        }
+
+        .metric-details .current-week,
+        .metric-details .previous-week {
+            margin-bottom: 2px;
+        }
+
+        .metric-details .trend {
             font-weight: bold;
+            font-size: 10px;
         }
 
         .trend-up {
@@ -467,8 +482,8 @@
               </div>
 
             <div class="header-title-container">
-                <h1>Supplier TAT Performance (Weekly Comparison)</h1>
-                <h2></h2>
+                <h1>Supplier Onboarding TAT Dashboard</h1>
+                <h2>Compare weekly TAT metrics across suppliers</h2>
             </div>
         </header>
 
@@ -476,28 +491,43 @@
             <div class="overall-metrics" id="overallMetrics">
                 <div class="metric-card">
                     <h3>Overall TAT</h3>
-                    <div class="metric-value" id="overallTat">-</div>
-                    <div id="overallTatTrend">No change</div>
+                    <div class="metric-details">
+                        <div class="current-week">Current Week: <span id="currentOverallTat">-</span></div>
+                        <div class="previous-week">Previous Week: <span id="previousOverallTat">-</span></div>
+                        <div class="trend" id="overallTatTrend">-</div>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <h3>xWS Activation</h3>
-                    <div class="metric-value" id="xwsActivation">-</div>
-                    <div id="xwsActivationTrend">No change</div>
+                    <div class="metric-details">
+                        <div class="current-week">Current Week: <span id="currentXwsActivation">-</span></div>
+                        <div class="previous-week">Previous Week: <span id="previousXwsActivation">-</span></div>
+                        <div class="trend" id="xwsActivationTrend">-</div>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <h3>System Activation</h3>
-                    <div class="metric-value" id="systemActivation">-</div>
-                    <div id="systemActivationTrend">No change</div>
+                    <div class="metric-details">
+                        <div class="current-week">Current Week: <span id="currentSystemActivation">-</span></div>
+                        <div class="previous-week">Previous Week: <span id="previousSystemActivation">-</span></div>
+                        <div class="trend" id="systemActivationTrend">-</div>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <h3>xWS to IDV</h3>
-                    <div class="metric-value" id="xwsToIdv">-</div>
-                    <div id="xwsToIdvTrend">No change</div>
+                    <div class="metric-details">
+                        <div class="current-week">Current Week: <span id="currentXwsToIdv">-</span></div>
+                        <div class="previous-week">Previous Week: <span id="previousXwsToIdv">-</span></div>
+                        <div class="trend" id="xwsToIdvTrend">-</div>
+                    </div>
                 </div>
                 <div class="metric-card">
                     <h3>IDV to System</h3>
-                    <div class="metric-value" id="idvToSystem">-</div>
-                    <div id="idvToSystemTrend">No change</div>
+                    <div class="metric-details">
+                        <div class="current-week">Current Week: <span id="currentIdvToSystem">-</span></div>
+                        <div class="previous-week">Previous Week: <span id="previousIdvToSystem">-</span></div>
+                        <div class="trend" id="idvToSystemTrend">-</div>
+                    </div>
                 </div>
             </div>
 
@@ -578,48 +608,84 @@
         async function loadOverallMetrics() {
             try {
                 const response = await fetch('/get_overall_metrics');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, StatusText: ${response.statusText}`);
+                }
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('Invalid response format: Expected JSON');
+                }
                 const data = await response.json();
                 
                 if (data.error) {
-                    console.error(data.error);
-                    return;
+                    throw new Error(`Server error: ${data.error}`);
                 }
                 
+                // Log data for debugging
+                console.log('API Response:', data);
+                
+                // Ensure overall_tat data is present, use 0 as fallback
+                const differences = {
+                    overall_tat: data.differences.overall_tat ?? 0,
+                    xws_activation: data.differences.xws_activation ?? 0,
+                    system_activation: data.differences.system_activation ?? 0,
+                    xws_to_idv: data.differences.xws_to_idv ?? 0,
+                    idv_to_system: data.differences.idv_to_system ?? 0
+                };
+                const current_metrics = {
+                    overall_tat: data.current_metrics.overall_tat ?? 0,
+                    xws_activation: data.current_metrics.xws_activation ?? 0,
+                    system_activation: data.current_metrics.system_activation ?? 0,
+                    xws_to_idv: data.current_metrics.xws_to_idv ?? 0,
+                    idv_to_system: data.current_metrics.idv_to_system ?? 0
+                };
+                const previous_metrics = {
+                    overall_tat: data.previous_metrics.overall_tat ?? 0,
+                    xws_activation: data.previous_metrics.xws_activation ?? 0,
+                    system_activation: data.previous_metrics.system_activation ?? 0,
+                    xws_to_idv: data.previous_metrics.xws_to_idv ?? 0,
+                    idv_to_system: data.previous_metrics.idv_to_system ?? 0
+                };
+                
                 // Update metric cards
-                updateMetricCard('overallTat', data.overall_tat);
-                updateMetricCard('xwsActivation', data.xws_activation);
-                updateMetricCard('systemActivation', data.system_activation);
-                updateMetricCard('xwsToIdv', data.xws_to_idv);
-                updateMetricCard('idvToSystem', data.idv_to_system);
+                updateMetricCard('overallTat', differences.overall_tat, current_metrics.overall_tat, previous_metrics.overall_tat);
+                updateMetricCard('xwsActivation', differences.xws_activation, current_metrics.xws_activation, previous_metrics.xws_activation);
+                updateMetricCard('systemActivation', differences.system_activation, current_metrics.system_activation, previous_metrics.system_activation);
+                updateMetricCard('xwsToIdv', differences.xws_to_idv, current_metrics.xws_to_idv, previous_metrics.xws_to_idv);
+                updateMetricCard('idvToSystem', differences.idv_to_system, current_metrics.idv_to_system, previous_metrics.idv_to_system);
                 
             } catch (error) {
-                console.error('Error loading overall metrics:', error);
+                console.error('Error loading overall metrics:', {
+                    message: error.message,
+                    stack: error.stack
+                });
+                // Fallback: Set all metric cards to default values
+                ['overallTat', 'xwsActivation', 'systemActivation', 'xwsToIdv', 'idvToSystem'].forEach(metric => {
+                    updateMetricCard(metric, 0, 0, 0);
+                });
             }
         }
 
-        function updateMetricCard(elementId, value) {
-            const element = document.getElementById(elementId);
-            const trendElement = document.getElementById(elementId + 'Trend');
+        function updateMetricCard(elementId, value, current_metrics, previous_metrics) {
+            const currentElement = document.getElementById(`current${elementId.charAt(0).toUpperCase() + elementId.slice(1)}`);
+            const previousElement = document.getElementById(`previous${elementId.charAt(0).toUpperCase() + elementId.slice(1)}`);
+            const trendElement = document.getElementById(`${elementId}Trend`);
             
-            if (value === undefined || value === null) {
-                element.textContent = '-';
-                trendElement.textContent = 'No data';
-                return;
-            }
+            // Use 0 as fallback for missing values
+            const currentValue = current_metrics ?? 0;
+            const previousValue = previous_metrics ?? 0;
+            const differenceValue = value ?? 0;
             
-            element.textContent = value.toFixed(2);
-            element.className = `metric-value ${value < 0 ? 'trend-down' : 'trend-up'}`;
+            currentElement.textContent = currentValue.toFixed(2);
+            previousElement.textContent = previousValue.toFixed(2);
             
-            if (value > 0) {
-                trendElement.textContent = 'Increased';
-                trendElement.className = 'trend-up';
-            } else if (value < 0) {
-                trendElement.textContent = 'Decreased';
-                trendElement.className = 'trend-down';
-            } else {
-                trendElement.textContent = 'No change';
-                trendElement.className = '';
-            }
+            const difference = (currentValue - previousValue).toFixed(2);
+            const percentageChange = previousValue !== 0 ? ((currentValue - previousValue) / previousValue * 100).toFixed(1) : 0;
+            const displayDifference = Math.abs(difference).toFixed(2);
+            const arrow = difference > 0 ? '↑' : difference < 0 ? '↓' : '';
+            
+            trendElement.textContent = `${arrow} ${displayDifference} (${Math.abs(percentageChange)}%)`;
+            trendElement.className = `trend ${difference > 0 ? 'trend-up' : difference < 0 ? 'trend-down' : ''}`;
         }
 
         // Load supplier table data
