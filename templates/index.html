@@ -1,833 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Supplier Onboarding TAT Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Incentive Lookup</title>
     <style>
-        :root {
-            --google-blue: #1a73e8;
-            --google-red: #db4437;
-            --google-yellow: #f4b400;
-            --google-green: #0f9d58;
-            --google-grey: #5f6368;
-            --google-light-grey: #f1f3f4;
-            --google-dark-grey: #202124;
-            --google-white: #ffffff;
-            --google-card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            --google-card-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.2);
-            --gradient-blue-green: linear-gradient(135deg, #1a73e8, #0f9d58);
-        }
-
-        * {
-            font-size: 16px;
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Cambria", serif;
-        }
-
         body {
-            background: #f8f9fa;
-            color: var(--google-dark-grey);
-            line-height: 1.5;
-            height: 100vh;
-            overflow: hidden;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
         .container {
-            max-width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        header {
-            background: var(--google-white);
-            padding: 8px 20px;
-            box-shadow: 0 4px 8px rgba(26, 115, 232, 0.1);
+            background-color: #fff;
+            padding: 20px 40px;
             border-radius: 8px;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            margin: 8px;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 4px;
-          }
-    
-          .google-logo {
-            display: flex;
-            align-items: center;
-          }
-    
-          .google-logo span {
-            font-size: 25px;
-            font-weight: 700;
-            display: inline-block;
-            animation: float-logo 5s infinite ease-in-out;
-          }
-    
-          .google-logo .g {
-            color: var(--google-blue);
-            animation-delay: 0s;
-          }
-          .google-logo .o1 {
-            color: var(--google-red);
-            animation-delay: 0.1s;
-          }
-          .google-logo .o2 {
-            color: var(--google-yellow);
-            animation-delay: 0.2s;
-          }
-          .google-logo .g2 {
-            color: var(--google-blue);
-            animation-delay: 0.3s;
-          }
-          .google-logo .l {
-            color: var(--google-green);
-            animation-delay: 0.4s;
-          }
-          .google-logo .e {
-            color: var(--google-red);
-            animation-delay: 0.5s;
-          }
-    
-          .handshake {
-            font-size: 16px;
-            color: var(--google-grey);
-            animation: pulse 2s infinite;
-          }
-    
-          .cognizant-logo {
-            font-size: 23px;
-            font-weight: 700;
-            color: #0033a1;
-            position: relative;
-          }
-    
-          .cognizant-logo::after {
-            content: "";
-            position: absolute;
-            bottom: -3px;
-            left: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            height: 1px;
-            background: var(--gradient-blue-green);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-          }
-    
-          .cognizant-logo:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-          }
-
-        .header-title-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            max-width: 600px;
             text-align: center;
-            gap: 2px;
-            font-size: 20px;
         }
-        .header-title-container > h1 {
-            font-size: 25px;
-        }
-
         h1 {
-            font-family: Cambria, serif;
-            font-size: 20px;
-            color: var(--google-blue);
-            font-weight: 700;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.5s ease;
-            transition: all 0.3s;
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
-
-        h2 {
-            font-family: Cambria, serif;
-            font-size: 14px;
-            color: var(--google-dark-grey);
-            font-weight: 400;
-            opacity: 0.85;
-            animation: fadeIn 0.5s ease 0.2s;
-        }
-
-        .main-content {
+        .search-area {
             display: flex;
-            flex: 1;
-            overflow: hidden;
-            flex-direction: column;
-            padding: 12px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
         }
-
-        .overall-metrics {
-            background: var(--google-white);
-            border-radius: 8px;
-            padding: 16px;
-            box-shadow: var(--google-card-shadow);
-            margin-bottom: 12px;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 16px;
-        }
-
-        .metric-card {
-            text-align: center;
-            padding: 12px;
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            background: var(--google-light-grey);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .metric-card h3 {
-            font-size: 15px;
-            color: var(--google-grey);
-            margin-bottom: 4px;
-        }
-
-        .metric-details {
-            font-size: 12px;
-            line-height: 1.2;
-            color: var(--google-dark-grey);
-        }
-
-        .metric-details .current-week,
-        .metric-details .previous-week {
-            margin-bottom: 2px;
-        }
-
-        .metric-details .trend {
-            font-weight: bold;
-            font-size: 10px;
-        }
-
-        .trend-up {
-            color: var(--google-red);
-        }
-
-        .trend-down {
-            color: var(--google-green);
-        }
-
-        .table-container {
-            background: var(--google-white);
-            border-radius: 8px;
-            padding: 12px;
-            box-shadow: var(--google-card-shadow);
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .table-title {
             font-size: 16px;
-            font-weight: 500;
-            color: var(--google-dark-grey);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            width: 200px;
         }
-
-        .table-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .table-wrapper {
-            flex: 1;
-            overflow: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            position: relative;
-        }
-
-        thead th {
-            position: sticky;
-            top: 0;
-            background-color: #f1f3f4 !important;
-            z-index: 10;
-            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 10px 12px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        th {
-            background-color: #f1f3f4;
-            font-weight: 500;
-            color: var(--google-dark-grey);
-        }
-
-        tr:hover {
-            background-color: #f8f9fa;
-        }
-
-        .search-container {
-            position: relative;
-            width: 300px;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #dadce0;
-            border-radius: 5px;
-            background: #fff;
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
             font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .search-container i {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--google-grey);
-            font-size: 12px;
-        }
-
-        .dropdown-list {
-            display: none;
-            position: absolute;
-            width: 100%;
-            max-height: 160px;
-            overflow-y: auto;
-            background: #fff;
-            border: 1px solid #dadce0;
-            border-radius: 0 0 5px 5px;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .dropdown-list div {
-            padding: 8px 12px;
             cursor: pointer;
-            font-size: 12px;
+            transition: background-color 0.3s ease;
         }
-
-        .dropdown-list div:hover {
-            background: #e8f0fe;
+        button:hover {
+            background-color: #2980b9;
         }
-
-        .mdc-button {
-            height: 36px;
-            border-radius: 18px;
-            font-weight: 500;
-            font-size: 12px;
-            background: var(--gradient-blue-green) !important;
-            color: white !important;
-            transition: all 0.3s;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        #results {
+            margin-top: 20px;
+            text-align: left;
         }
-
-        .mdc-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .mdc-button__icon {
-            display: inline;
-            margin-right: 5px;
-            font-size: 12px;
-        }
-
-        .reset-button {
-            background: var(--google-light-grey) !important;
-            color: var(--google-grey) !important;
-        }
-
-        /* Tooltip styles */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 220px;
-            background-color: var(--google-dark-grey);
-            color: var(--google-white);
-            text-align: center;
+        .employee-info {
+            border: 1px solid #ddd;
+            padding: 20px;
             border-radius: 6px;
-            padding: 8px;
-            position: absolute;
-            z-index: 1000;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-size: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            pointer-events: none;
+            background-color: #f9f9f9;
         }
-
-        .tooltip .tooltiptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: var(--google-dark-grey) transparent transparent transparent;
+        .employee-info p {
+            margin: 5px 0;
         }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 0.95;
+        .employee-info p strong {
+            color: #555;
+            display: inline-block;
+            width: 150px; /* Adjust as needed */
         }
-
-        .tooltip-content {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .tooltip-row {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .tooltip-label {
-            font-weight: 500;
-        }
-
-        .tooltip-value {
-            font-weight: 400;
-        }
-
-        @media (max-width: 768px) {
-            .overall-metrics {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+        .not-found {
+            color: #e74c3c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <div class="google-logo">
-                  <span class="g">G</span>
-                  <span class="o1">o</span>
-                  <span class="o2">o</span>
-                  <span class="g2">g</span>
-                  <span class="l">l</span>
-                  <span class="e">e</span>
-                </div>
-                <div class="handshake">
-                  <i class="fas fa-handshake"></i>
-                </div>
-                <div class="cognizant-logo">Cognizant</div>
-              </div>
 
-            <div class="header-title-container">
-                <h1>Supplier Onboarding TAT Dashboard</h1>
-                <h2>Compare weekly TAT metrics across suppliers</h2>
-            </div>
-        </header>
-
-        <div class="main-content">
-            <div class="overall-metrics" id="overallMetrics">
-                <div class="metric-card">
-                    <h3>Overall TAT</h3>
-                    <div class="metric-details">
-                        <div class="current-week">Current Week: <span id="currentOverallTat">-</span></div>
-                        <div class="previous-week">Previous Week: <span id="previousOverallTat">-</span></div>
-                        <div class="trend" id="overallTatTrend">-</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <h3>xWS Activation</h3>
-                    <div class="metric-details">
-                        <div class="current-week">Current Week: <span id="currentXwsActivation">-</span></div>
-                        <div class="previous-week">Previous Week: <span id="previousXwsActivation">-</span></div>
-                        <div class="trend" id="xwsActivationTrend">-</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <h3>System Activation</h3>
-                    <div class="metric-details">
-                        <div class="current-week">Current Week: <span id="currentSystemActivation">-</span></div>
-                        <div class="previous-week">Previous Week: <span id="previousSystemActivation">-</span></div>
-                        <div class="trend" id="systemActivationTrend">-</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <h3>xWS to IDV</h3>
-                    <div class="metric-details">
-                        <div class="current-week">Current Week: <span id="currentXwsToIdv">-</span></div>
-                        <div class="previous-week">Previous Week: <span id="previousXwsToIdv">-</span></div>
-                        <div class="trend" id="xwsToIdvTrend">-</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <h3>IDV to System</h3>
-                    <div class="metric-details">
-                        <div class="current-week">Current Week: <span id="currentIdvToSystem">-</span></div>
-                        <div class="previous-week">Previous Week: <span id="previousIdvToSystem">-</span></div>
-                        <div class="trend" id="idvToSystemTrend">-</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-container">
-                <div class="table-header">
-                    <div class="table-title">
-                        <i class="fas fa-table"></i>
-                        <span>Supplier TAT Details</span>
-                    </div>
-                    <div class="table-actions">
-                        <div class="search-container">
-                            <input type="text" id="supplierSearch" placeholder="Search supplier..." autocomplete="off" />
-                            <i class="fas fa-search"></i>
-                            <div id="supplierDropdown" class="dropdown-list"></div>
-                        </div>
-                        <button class="mdc-button mdc-button--raised reset-button" id="resetButton">
-                            <span class="mdc-button__label">
-                                <i class="fas fa-redo mdc-button__icon"></i>
-                                Reset
-                            </span>
-                        </button>
-                        <button class="mdc-button mdc-button--raised" id="sortHighLow" style="background: var(--google-red) !important; font-size: 11px; height: 30px;">
-                            <span class="mdc-button__label">
-                                <i class="fas fa-sort-amount-down mdc-button__icon"></i>
-                                High to Low
-                            </span>
-                        </button>
-                        <button class="mdc-button mdc-button--raised" id="sortLowHigh" style="background: var(--google-green) !important; font-size: 11px; height: 30px;">
-                            <span class="mdc-button__label">
-                                <i class="fas fa-sort-amount-up mdc-button__icon"></i>
-                                Low to High
-                            </span>
-                        </button>
-                    </div>
-                </div>
-                <div class="table-wrapper">
-                    <table id="supplierTable">
-                        <thead>
-                            <tr>
-                                <th>Supplier</th>
-                                <th>Total Onboarding</th>
-                                <th>Overall TAT</th>
-                                <th>xWS Activation</th>
-                                <th>System Activation</th>
-                                <th>xWS to IDV</th>
-                                <th>IDV to System</th>
-                            </tr>
-                        </thead>
-                        <tbody id="supplierTableBody">
-                            <!-- Table content will be populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h1>Employee Incentive Lookup</h1>
+    <p>Please enter your Employee ID to view your incentive data.</p>
+    
+    <div class="search-area">
+        <input type="text" id="empIdInput" placeholder="Enter Employee ID">
+        <button onclick="searchEmployee()">Search</button>
     </div>
+    
+    <div id="results">
+        </div>
+</div>
 
-    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-    <script>
-        mdc.autoInit();
+<script>
+    // Employee Data - This is your dataset converted to a JavaScript array of objects
+    const employees = [
+        {"EMP ID": 2343380, "EMP Name": "Robert Asauro Lopez", "A) RDOT Incentive(Aug'25)": 10500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 1500, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 26500},
+        {"EMP ID": 2343351, "EMP Name": "Hannah Abigail Guiuan Baguio", "A) RDOT Incentive(Aug'25)": 13500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 5000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 21600},
+        {"EMP ID": 2343377, "EMP Name": "Aileen Fletchero", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 21300},
+        {"EMP ID": 874827, "EMP Name": "Juana Bacani", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 21100},
+        {"EMP ID": 2343394, "EMP Name": "Jeremie Quitadio Laurencio", "A) RDOT Incentive(Aug'25)": 12000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 4000, "VMS Project Support": 1000, "WFP Tickets": 1600, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 20600},
+        {"EMP ID": 2343436, "EMP Name": "Karla Jane Lunar", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 18000},
+        {"EMP ID": 2345672, "EMP Name": "Xyza Pearl Jalandoni", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 17200},
+        {"EMP ID": 2343367, "EMP Name": "Lauren Trinidad", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 13100},
+        {"EMP ID": 2343372, "EMP Name": "Alvin Malana Beltran", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 2300, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 12800},
+        {"EMP ID": 2393759, "EMP Name": "Hershey Joi Barrias", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
+        {"EMP ID": 2343379, "EMP Name": "Neil Marvic Malabanan", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
+        {"EMP ID": 624390, "EMP Name": "Vanessa Christine Dorotheo", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
+        {"EMP ID": 2343355, "EMP Name": "Jessa Pauline Lizardo", "A) RDOT Incentive(Aug'25)": 9000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12000},
+        {"EMP ID": 2343362, "EMP Name": "Veronica Claire Carreon Yumul", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 11200},
+        {"EMP ID": 2343984, "EMP Name": "Ruth Eloisa Dacallos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 11000},
+        {"EMP ID": 2343374, "EMP Name": "Maverick Arthur Pineda", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 11000},
+        {"EMP ID": 2343389, "EMP Name": "April Abad Ramos", "A) RDOT Incentive(Aug'25)": 9000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 10600},
+        {"EMP ID": 2343694, "EMP Name": "Larisse Salzar", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 10100},
+        {"EMP ID": 485720, "EMP Name": "Poblete, Anne Loraine Jacinto", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 10100},
+        {"EMP ID": 2343399, "EMP Name": "Cris Ryan Aviso", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 4000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 9500},
+        {"EMP ID": 2343350, "EMP Name": "Aika Victoria Belga", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 9500},
+        {"EMP ID": 2343439, "EMP Name": "Novilyn Fuentespina", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 500, "Grand Total": 9100},
+        {"EMP ID": 2343388, "EMP Name": "Jeffrey Tomas", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 500, "Weekly Bonanza WK1": 500, "Grand Total": 8700},
+        {"EMP ID": 2343360, "EMP Name": "Abigail Alquisada", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 8400},
+        {"EMP ID": 2393819, "EMP Name": "Hazel Mae Isanan Habana", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 8100},
+        {"EMP ID": 2289705, "EMP Name": "Ina Carmella Santiago", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 500, "Weekly Bonanza WK1": 500, "Grand Total": 7700},
+        {"EMP ID": 773968, "EMP Name": "Rubin, Jennylyn Tizado", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 200, "Weekly Bonanza WK1": 500, "Grand Total": 7700},
+        {"EMP ID": 2343400, "EMP Name": "Lys Bandoja", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 7500},
+        {"EMP ID": 2343378, "EMP Name": "Mevelyn Guinto", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 7500},
+        {"EMP ID": 2343393, "EMP Name": "Fritzie Vestidas Aravejo", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 7000},
+        {"EMP ID": 2343270, "EMP Name": "Danica Monique Gale", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 7000},
+        {"EMP ID": 2343268, "EMP Name": "Aira Camille Tingcungco", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 6500},
+        {"EMP ID": 684084, "EMP Name": "Llanes, Paula Marie Beltran", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 6500},
+        {"EMP ID": 2343437, "EMP Name": "Ysabel Pelobello", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 500, "Grand Total": 6200},
+        {"EMP ID": 2395970, "EMP Name": "Virgilio Umali Cordova II", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 800, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5800},
+        {"EMP ID": 2343275, "EMP Name": "Rommel John Olarte", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5700},
+        {"EMP ID": 2343353, "EMP Name": "Paul Antivo", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5500},
+        {"EMP ID": 2393768, "EMP Name": "Guia Gelaika Mingo Girao", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 5400},
+        {"EMP ID": 2343982, "EMP Name": "Deona Maranan", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5000},
+        {"EMP ID": 2285759, "EMP Name": "Oliver Evan Hernandez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 4600},
+        {"EMP ID": 2343980, "EMP Name": "Melanie Boongaling", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4500},
+        {"EMP ID": 605018, "EMP Name": "Hanika Fuensalida", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 4500},
+        {"EMP ID": 2343442, "EMP Name": "Dannah Mae Santos", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4100},
+        {"EMP ID": 2402848, "EMP Name": "Laurice Catalan", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3500, "VMS Project Support": 0, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
+        {"EMP ID": 2393757, "EMP Name": "Nangkil,Covie Picardal", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
+        {"EMP ID": 2343392, "EMP Name": "Lorena Vega", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
+        {"EMP ID": 2343891, "EMP Name": "Carmina Lourdes Pando", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3900},
+        {"EMP ID": 2343373, "EMP Name": "Marlon Jad Payos", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3600},
+        {"EMP ID": 2343273, "EMP Name": "Maika Aleli Sese", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3600},
+        {"EMP ID": 2343370, "EMP Name": "Tessa Rae Mercado", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3500},
+        {"EMP ID": 2283076, "EMP Name": "Angel Ian Mae Guanzon", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3500},
+        {"EMP ID": 2343361, "EMP Name": "Kevin Mark Sucaldito", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3400},
+        {"EMP ID": 2343395, "EMP Name": "Sharmaine Reyes", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3300},
+        {"EMP ID": 2343375, "EMP Name": "Niño Lolito Candari", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3200},
+        {"EMP ID": 2343977, "EMP Name": "John Lawrence", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3000},
+        {"EMP ID": 2343276, "EMP Name": "Jeleah Aira Camila", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3000},
+        {"EMP ID": 2343381, "EMP Name": "Darren Jake Ng", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2700},
+        {"EMP ID": 2235973, "EMP Name": "Mary Alexis Ibarra", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2600},
+        {"EMP ID": 2393767, "EMP Name": "Ivy Grace Abinal Salazar", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
+        {"EMP ID": 2343368, "EMP Name": "Marc Angelo Perez", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
+        {"EMP ID": 2343352, "EMP Name": "Katherine Brozas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
+        {"EMP ID": 2343348, "EMP Name": "Cedie Tagunicar", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2400},
+        {"EMP ID": 2343347, "EMP Name": "Hanelyn Hostia", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2300},
+        {"EMP ID": 2343354, "EMP Name": "Michelle Biggayan", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 2200},
+        {"EMP ID": 2343349, "EMP Name": "Michelle Griño", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2200},
+        {"EMP ID": 2343371, "EMP Name": "Orlando Jr. Regurosa Gamay", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
+        {"EMP ID": 2343365, "EMP Name": "Roger Martires", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
+        {"EMP ID": 2343364, "EMP Name": "Meara Carys Pedregosa Toleran", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
+        {"EMP ID": 2343359, "EMP Name": "Jenny Mae Nepomuceno", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
+        {"EMP ID": 2343274, "EMP Name": "Rhenalyn Mercolita", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
+        {"EMP ID": 2343267, "EMP Name": "Paulino,Adrian Carlo Ramirez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
+        {"EMP ID": 2286934, "EMP Name": "John Paulo Dela Rosa", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 2000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
+        {"EMP ID": 2343895, "EMP Name": "Joshua Renzo Jacob", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1700},
+        {"EMP ID": 2283077, "EMP Name": "Jayson King Marquez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 700, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1700},
+        {"EMP ID": 2343391, "EMP Name": "Marc Kristoffer De Guzman", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
+        {"EMP ID": 2343376, "EMP Name": "Joanne Abbas", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
+        {"EMP ID": 2228538, "EMP Name": "Ralf Aaron Roxas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
+        {"EMP ID": 2231203, "EMP Name": "Gabrielle Anthony Israel", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1300},
+        {"EMP ID": 2343390, "EMP Name": "Charlene Ilustre", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1200},
+        {"EMP ID": 2343440, "EMP Name": "Daisy Marry Lomoljo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
+        {"EMP ID": 2343386, "EMP Name": "Shiella Marie Villena", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
+        {"EMP ID": 2280016, "EMP Name": "Kurt Lance Tagana", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
+        {"EMP ID": 641503, "EMP Name": "Ann Marjorie Medura", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
+        {"EMP ID": 2395212, "EMP Name": "Angelique Margarette Begino Soledad", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2393827, "EMP Name": "Kristoffer Belen Corcega", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2393826, "EMP Name": "Ma. Micah Angela Talion Oclarino", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2393758, "EMP Name": "Nicole Angela Paguio Pinote", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343985, "EMP Name": "Keith Richard Razon", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343981, "EMP Name": "Kenneth Cadalin", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343896, "EMP Name": "Chilly Yvette Ramos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343894, "EMP Name": "Luis Jamaica Santos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343893, "EMP Name": "Lorris Gio Quiles", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343892, "EMP Name": "Bernadeth Dominguez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343441, "EMP Name": "Rabia Samaon Tasil", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343435, "EMP Name": "Maria Katrina Aliwalas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343385, "EMP Name": "Raymundo Jr Mensorado Cortez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343384, "EMP Name": "Kenneth Prodigo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343366, "EMP Name": "Michael John Africano Delos Reyes", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343363, "EMP Name": "Huey Malaga Cuevas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343357, "EMP Name": "John Leigh Roperos Conde", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343272, "EMP Name": "Iris Mijares", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343269, "EMP Name": "Alyssa Faye Limbo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2305215, "EMP Name": "Beaño, Edison Halili", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2291722, "EMP Name": "Jorick Alfred Reynoso", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2050857, "EMP Name": "Michelle Charmie Cabardo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 883406, "EMP Name": "Maria Patricia Isabel Tiemsin", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 396326, "EMP Name": "Moreno,Oliver Mendoza", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
+        {"EMP ID": 2343396, "EMP Name": "Marjorie Sta. Ana", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 300},
+        {"EMP ID": 2343266, "EMP Name": "Abigail Ruth Salcedo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 100}
+    ];
 
-        // Global variables
-        let allSuppliersData = [];
+    function searchEmployee() {
+        // 1. Get the employee ID from the input field
+        const empIdInput = document.getElementById('empIdInput');
+        const empId = parseInt(empIdInput.value.trim(), 10);
+        
+        // 2. Find the employee in the data array
+        const foundEmployee = employees.find(employee => employee["EMP ID"] === empId);
 
-        // Initialize on load
-        document.addEventListener("DOMContentLoaded", function() {
-            loadOverallMetrics();
-            loadSupplierTable();
-            setupSearchDropdown();
+        // 3. Get the results container
+        const resultsDiv = document.getElementById('results');
+        
+        // 4. Clear any previous results
+        resultsDiv.innerHTML = '';
+
+        // 5. Display the results
+        if (foundEmployee) {
+            let employeeInfoHtml = '<div class="employee-info">';
             
-            // Event listeners
-            document.getElementById("sortHighLow").addEventListener("click", () => sortTable(true));
-            document.getElementById("sortLowHigh").addEventListener("click", () => sortTable(false));
-            document.getElementById("resetButton").addEventListener("click", resetDashboard);
-        });
+            // Loop through all the keys (column headers) of the found employee
+            for (const key in foundEmployee) {
+                // Skip the EMP ID and EMP Name, as we want to display them first
+                if (key === "EMP ID" || key === "EMP Name") continue;
 
-        // Load overall metrics
-        async function loadOverallMetrics() {
-            try {
-                const response = await fetch('/get_overall_metrics');
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}, StatusText: ${response.statusText}`);
-                }
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    throw new Error('Invalid response format: Expected JSON');
-                }
-                const data = await response.json();
+                const value = foundEmployee[key] || 0; // Use 0 if value is missing/falsy
                 
-                if (data.error) {
-                    throw new Error(`Server error: ${data.error}`);
-                }
+                // Capitalize the first letter of each word for display
+                const formattedKey = key.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                 
-                // Log data for debugging
-                console.log('API Response:', data);
-                
-                // Ensure overall_tat data is present, use 0 as fallback
-                const differences = {
-                    overall_tat: data.differences.overall_tat ?? 0,
-                    xws_activation: data.differences.xws_activation ?? 0,
-                    system_activation: data.differences.system_activation ?? 0,
-                    xws_to_idv: data.differences.xws_to_idv ?? 0,
-                    idv_to_system: data.differences.idv_to_system ?? 0
-                };
-                const current_metrics = {
-                    overall_tat: data.current_metrics.overall_tat ?? 0,
-                    xws_activation: data.current_metrics.xws_activation ?? 0,
-                    system_activation: data.current_metrics.system_activation ?? 0,
-                    xws_to_idv: data.current_metrics.xws_to_idv ?? 0,
-                    idv_to_system: data.current_metrics.idv_to_system ?? 0
-                };
-                const previous_metrics = {
-                    overall_tat: data.previous_metrics.overall_tat ?? 0,
-                    xws_activation: data.previous_metrics.xws_activation ?? 0,
-                    system_activation: data.previous_metrics.system_activation ?? 0,
-                    xws_to_idv: data.previous_metrics.xws_to_idv ?? 0,
-                    idv_to_system: data.previous_metrics.idv_to_system ?? 0
-                };
-                
-                // Update metric cards
-                updateMetricCard('overallTat', differences.overall_tat, current_metrics.overall_tat, previous_metrics.overall_tat);
-                updateMetricCard('xwsActivation', differences.xws_activation, current_metrics.xws_activation, previous_metrics.xws_activation);
-                updateMetricCard('systemActivation', differences.system_activation, current_metrics.system_activation, previous_metrics.system_activation);
-                updateMetricCard('xwsToIdv', differences.xws_to_idv, current_metrics.xws_to_idv, previous_metrics.xws_to_idv);
-                updateMetricCard('idvToSystem', differences.idv_to_system, current_metrics.idv_to_system, previous_metrics.idv_to_system);
-                
-            } catch (error) {
-                console.error('Error loading overall metrics:', {
-                    message: error.message,
-                    stack: error.stack
-                });
-                // Fallback: Set all metric cards to default values
-                ['overallTat', 'xwsActivation', 'systemActivation', 'xwsToIdv', 'idvToSystem'].forEach(metric => {
-                    updateMetricCard(metric, 0, 0, 0);
-                });
-            }
-        }
-
-        function updateMetricCard(elementId, value, current_metrics, previous_metrics) {
-            const currentElement = document.getElementById(`current${elementId.charAt(0).toUpperCase() + elementId.slice(1)}`);
-            const previousElement = document.getElementById(`previous${elementId.charAt(0).toUpperCase() + elementId.slice(1)}`);
-            const trendElement = document.getElementById(`${elementId}Trend`);
-            
-            // Use 0 as fallback for missing values
-            const currentValue = current_metrics ?? 0;
-            const previousValue = previous_metrics ?? 0;
-            const differenceValue = value ?? 0;
-            
-            currentElement.textContent = currentValue.toFixed(2);
-            previousElement.textContent = previousValue.toFixed(2);
-            
-            const difference = (currentValue - previousValue).toFixed(2);
-            const percentageChange = previousValue !== 0 ? ((currentValue - previousValue) / previousValue * 100).toFixed(1) : 0;
-            const displayDifference = Math.abs(difference).toFixed(2);
-            const arrow = difference > 0 ? '↑' : difference < 0 ? '↓' : '';
-            
-            trendElement.textContent = `${arrow} ${displayDifference} (${Math.abs(percentageChange)}%)`;
-            trendElement.className = `trend ${difference > 0 ? 'trend-up' : difference < 0 ? 'trend-down' : ''}`;
-        }
-
-        // Load supplier table data
-        async function loadSupplierTable() {
-            try {
-                const response = await fetch('/get_all_suppliers_data');
-                const data = await response.json();
-                
-                if (data.error) {
-                    console.error(data.error);
-                    return;
-                }
-                
-                allSuppliersData = data;
-                updateTable(allSuppliersData);
-                
-            } catch (error) {
-                console.error('Error loading supplier data:', error);
-            }
-        }
-
-        // Update table with data
-        function updateTable(data) {
-            const tableBody = document.getElementById("supplierTableBody");
-            tableBody.innerHTML = "";
-            
-            data.forEach(item => {
-                const formatDiff = (value, current, previous) => {
-                    if (value === null || value === undefined) return '-';
-                    const numValue = Number(value);
-                    if (isNaN(numValue)) return '-';
-                    
-                    // Remove negative sign for green (improved) values
-                    const displayValue = numValue < 0 ? Math.abs(numValue).toFixed(2) : numValue.toFixed(2);
-                    const colorClass = numValue < 0 ? 'trend-down' : 'trend-up';
-                    return `
-                        <div class="tooltip">
-                            <span class="${colorClass}">${displayValue}</span>
-                            <span class="tooltiptext">
-                                <div class="tooltip-content">
-                                    <div class="tooltip-row">
-                                        <span class="tooltip-label">Current Week:</span>
-                                        <span class="tooltip-value">${current !== undefined ? current.toFixed(2) : '-'}</span>
-                                    </div>
-                                    <div class="tooltip-row">
-                                        <span class="tooltip-label">Previous Week:</span>
-                                        <span class="tooltip-value">${previous !== undefined ? previous.toFixed(2) : '-'}</span>
-                                    </div>
-                                </div>
-                            </span>
-                        </div>
-                    `;
-                };
-                
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${item.supplier}</td>
-                    <td>${item.total_onboarding}</td>
-                    <td>${formatDiff(item.overall_tat_diff, item.current_overall_tat, item.previous_overall_tat)}</td>
-                    <td>${formatDiff(item.xws_activation_diff, item.current_xws_activation, item.previous_xws_activation)}</td>
-                    <td>${formatDiff(item.system_activation_diff, item.current_system_activation, item.previous_system_activation)}</td>
-                    <td>${formatDiff(item.xws_to_idv_diff, item.current_xws_to_idv, item.previous_xws_to_idv)}</td>
-                    <td>${formatDiff(item.idv_to_system_diff, item.current_idv_to_system, item.previous_idv_to_system)}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Sort table by Overall TAT
-        function sortTable(highToLow) {
-            const sortedData = [...allSuppliersData].sort((a, b) => {
-                const aValue = a.overall_tat_diff || 0;
-                const bValue = b.overall_tat_diff || 0;
-                return highToLow ? bValue - aValue : aValue - bValue;
-            });
-            updateTable(sortedData);
-        }
-
-        // Setup search dropdown
-        function setupSearchDropdown() {
-            const input = document.getElementById("supplierSearch");
-            const dropdown = document.getElementById("supplierDropdown");
-
-            input.addEventListener("input", async () => {
-                const searchTerm = input.value.toLowerCase();
-                try {
-                    const response = await fetch('/get_suppliers');
-                    const suppliers = await response.json();
-                    const filteredItems = suppliers.filter(item => 
-                        item.toLowerCase().includes(searchTerm)
-                    );
-                    
-                    dropdown.innerHTML = "";
-                    if (filteredItems.length === 0) {
-                        const noResult = document.createElement("div");
-                        noResult.textContent = "No suppliers found";
-                        noResult.style.padding = "8px 12px";
-                        noResult.style.color = "var(--google-grey)";
-                        dropdown.appendChild(noResult);
-                    } else {
-                        filteredItems.forEach(item => {
-                            const option = document.createElement("div");
-                            option.textContent = item;
-                            option.addEventListener("click", () => {
-                                input.value = item;
-                                dropdown.style.display = "none";
-                                filterTable(item);
-                            });
-                            dropdown.appendChild(option);
-                        });
-                    }
-                    dropdown.style.display = filteredItems.length ? "block" : "none";
-                } catch (error) {
-                    console.error('Error filtering suppliers:', error);
-                }
-            });
-            
-            document.addEventListener("click", function(e) {
-                if (!e.target.closest(".search-container")) {
-                    dropdown.style.display = "none";
-                }
-            });
-        }
-
-        // Filter table by supplier
-        function filterTable(supplierName) {
-            if (!supplierName) {
-                updateTable(allSuppliersData);
-                return;
+                employeeInfoHtml += `<p><strong>${formattedKey}:</strong> ${value.toLocaleString()}</p>`;
             }
             
-            const filteredData = allSuppliersData.filter(item => 
-                item.supplier.toLowerCase().includes(supplierName.toLowerCase())
-            );
-            updateTable(filteredData);
+            // Add EMP ID and Name at the top
+            const empName = foundEmployee["EMP Name"];
+            const grandTotal = foundEmployee["Grand Total"];
+            
+            resultsDiv.innerHTML = `
+                <div class="employee-info">
+                    <p><strong>Employee Name:</strong> ${empName}</p>
+                    <p><strong>Employee ID:</strong> ${empId}</p>
+                    <hr>
+                    ${employeeInfoHtml}
+                </div>
+            `;
+        } else {
+            // Display a not found message
+            resultsDiv.innerHTML = '<p class="not-found">Employee ID not found. Please check the ID and try again.</p>';
         }
+    }
+</script>
 
-        // Reset dashboard
-        function resetDashboard() {
-            document.getElementById("supplierSearch").value = "";
-            updateTable(allSuppliersData);
-        }
-    </script>
 </body>
 </html>
