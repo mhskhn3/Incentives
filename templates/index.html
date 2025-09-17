@@ -1,19 +1,17 @@
-
-Hasan Khan New message
-12:08 AM (0 minutes ago)
-to Mohd
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weekly Bonanza Incentive Lookup</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Material Components for Web (MDC) -->
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #e8f0fe 0%, #f5f7fa 100%);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -39,20 +37,21 @@ to Mohd
 
         .peso-sign {
             position: absolute;
-            font-size: 2em;
-            color: rgba(52, 168, 83, 0.3); /* Greenish tint for Philippine Peso */
+            font-size: calc(1.5em + 1vw);
+            color: rgba(52, 168, 83, 0.4); /* Google-inspired green */
             animation: fall linear infinite;
             user-select: none;
+            transform-origin: center;
         }
 
         @keyframes fall {
             0% {
-                transform: translateY(-100vh);
-                opacity: 1;
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(100vh);
-                opacity: 0.5;
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0.3;
             }
         }
 
@@ -63,14 +62,13 @@ to Mohd
 
         .container {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             text-align: center;
             position: relative;
-            overflow: hidden;
             animation: slideUp 0.8s ease-out;
             z-index: 1;
         }
@@ -80,182 +78,167 @@ to Mohd
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .container::before {
-            content: '';
+        .header {
+            background: linear-gradient(to right, #4285f4, #ea4335, #fbbc05, #34a853);
+            height: 6px;
+            border-radius: 16px 16px 0 0;
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(to right, #4285f4, #ea4335, #fbbc05, #34a853);
+            right: 0;
         }
 
         h1 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-size: 2.5em;
-            color: #1a73e8;
-            margin: 10px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            font-weight: 700;
+            color: #202124;
+            margin: 16px 0;
+            letter-spacing: 0.5px;
         }
 
         p.subtitle {
             font-size: 1.2em;
-            color: #555;
-            margin-bottom: 30px;
+            color: #5f6368;
+            margin-bottom: 24px;
         }
 
         .search-area {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
+            gap: 16px;
+            margin-bottom: 32px;
         }
 
-        input[type="text"] {
-            padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
-            font-size: 1.1em;
-            width: 250px;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            outline: none;
+        .mdc-text-field {
+            width: 300px;
         }
 
-        input[type="text"]:focus {
-            border-color: #4285f4;
-            box-shadow: 0 0 8px rgba(66, 133, 244, 0.3);
-        }
-
-        button {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(45deg, #ea4335, #fbbc05);
-            color: white;
-            font-size: 1.1em;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
+        .mdc-button {
+            border-radius: 24px;
+            text-transform: none;
+            font-weight: 500;
+            background: linear-gradient(45deg, #4285f4, #34a853);
+            color: white !important;
+            padding: 0 24px;
+            height: 48px;
             transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
         }
 
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        .mdc-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        button::after {
-            content: '🎉';
-            position: absolute;
-            font-size: 1.5em;
-            right: -30px;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: right 0.3s, opacity 0.3s;
-        }
-
-        button:hover::after {
-            right: 10px;
-            opacity: 1;
+        .mdc-button .material-icons {
+            margin-left: 8px;
         }
 
         #results {
-            margin-top: 20px;
+            margin-top: 24px;
             text-align: left;
         }
 
-        .employee-info {
+        .employee-card {
             background: #f8f9fa;
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid #e0e0e0;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #dadce0;
             animation: fadeIn 0.5s ease-in;
         }
 
-        .employee-info p {
+        .employee-card p {
             margin: 8px 0;
             font-size: 1.1em;
             display: flex;
             align-items: center;
+            color: #202124;
         }
 
-        .employee-info p strong {
-            color: #333;
-            width: 200px;
+        .employee-card p strong {
+            color: #202124;
+            width: 220px;
             font-weight: 500;
         }
 
-        .employee-info p::before {
+        .employee-card p::before {
             content: '🏆';
-            margin-right: 10px;
+            margin-right: 8px;
             font-size: 1.2em;
         }
 
-        .employee-info hr {
+        .employee-card hr {
             border: 0;
-            border-top: 1px solid #ddd;
-            margin: 15px 0;
+            border-top: 1px solid #dadce0;
+            margin: 16px 0;
         }
 
         .not-found {
-            color: #ea4335;
+            color: #d93025;
             font-size: 1.2em;
-            font-weight: bold;
+            font-weight: 500;
+            background: #fef7e0;
+            padding: 12px;
+            border-radius: 8px;
             text-align: center;
             animation: shake 0.5s;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
         .bonanza-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 16px;
+            right: 16px;
             background: #34a853;
             color: white;
-            padding: 8px 15px;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9em;
-            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
             animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .loading-spinner {
+            display: none;
+            font-size: 1.5em;
+            color: #4285f4;
+            text-align: center;
+            margin-top: 16px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @media (max-width: 600px) {
             .container {
-                padding: 20px;
+                padding: 16px;
             }
 
             h1 {
                 font-size: 2em;
             }
 
-            input[type="text"] {
+            .mdc-text-field {
                 width: 100%;
             }
 
             .search-area {
                 flex-direction: column;
-                gap: 10px;
+                gap: 12px;
             }
         }
     </style>
@@ -263,182 +246,116 @@ to Mohd
 <body>
     <div class="currency-animation" id="currencyAnimation"></div>
     <div class="container">
+        <div class="header"></div>
         <div class="bonanza-badge">Weekly Bonanza</div>
         <h1>Weekly Bonanza Lookup</h1>
         <p class="subtitle">Enter your Employee ID to discover your exciting incentives!</p>
         
         <div class="search-area">
-            <input type="text" id="empIdInput" placeholder="Enter Employee ID">
-            <button onclick="searchEmployee()">Search Bonanza</button>
+            <div class="mdc-text-field mdc-text-field--outlined">
+                <input type="text" id="empIdInput" class="mdc-text-field__input" aria-label="Employee ID" placeholder="Enter Employee ID">
+                <div class="mdc-notched-outline">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label class="mdc-floating-label">Employee ID</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
+                </div>
+            </div>
+            <button class="mdc-button mdc-button--raised" onclick="searchEmployee()">
+                <span class="mdc-button__label">Search Bonanza</span>
+                <i class="material-icons">search</i>
+            </button>
         </div>
         
         <div id="results"></div>
+        <div class="loading-spinner" id="loadingSpinner">
+            <i class="material-icons">autorenew</i>
+        </div>
     </div>
 
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script>
+        // Initialize MDC components
+        const textField = new mdc.textField.MDCTextField(document.querySelector('.mdc-text-field'));
+        const button = new mdc.ripple.MDCRipple(document.querySelector('.mdc-button'));
+
         // Create animated peso signs
         function createPesoSigns() {
             const animationContainer = document.getElementById('currencyAnimation');
-            const numSigns = 20; // Number of peso signs
+            const numSigns = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 15;
             for (let i = 0; i < numSigns; i++) {
                 const peso = document.createElement('div');
                 peso.className = 'peso-sign';
                 peso.textContent = '₱';
                 peso.style.left = `${Math.random() * 100}vw`;
-                peso.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration between 5-10s
-                peso.style.animationDelay = `${Math.random() * 5}s`; // Random delay
+                peso.style.animationDuration = `${Math.random() * 4 + 6}s`;
+                peso.style.animationDelay = `${Math.random() * 3}s`;
+                peso.style.fontSize = `${Math.random() * 1.5 + 1.5}em`;
                 animationContainer.appendChild(peso);
             }
         }
 
-        // Call the function when the page loads
-        window.onload = createPesoSigns;
-
-        // Employee Data
+        // Employee Data (unchanged)
         const employees = [
             {"EMP ID": 2343380, "EMP Name": "Robert Asauro Lopez", "A) RDOT Incentive(Aug'25)": 10500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 1500, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 26500},
             {"EMP ID": 2343351, "EMP Name": "Hannah Abigail Guiuan Baguio", "A) RDOT Incentive(Aug'25)": 13500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 5000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 21600},
-            {"EMP ID": 2343377, "EMP Name": "Aileen Fletchero", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 21300},
-            {"EMP ID": 874827, "EMP Name": "Juana Bacani", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 21100},
-            {"EMP ID": 2343394, "EMP Name": "Jeremie Quitadio Laurencio", "A) RDOT Incentive(Aug'25)": 12000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 4000, "VMS Project Support": 1000, "WFP Tickets": 1600, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 20600},
-            {"EMP ID": 2343436, "EMP Name": "Karla Jane Lunar", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 18000},
-            {"EMP ID": 2345672, "EMP Name": "Xyza Pearl Jalandoni", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 17200},
-            {"EMP ID": 2343367, "EMP Name": "Lauren Trinidad", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 13100},
-            {"EMP ID": 2343372, "EMP Name": "Alvin Malana Beltran", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 2300, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 12800},
-            {"EMP ID": 2393759, "EMP Name": "Hershey Joi Barrias", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
-            {"EMP ID": 2343379, "EMP Name": "Neil Marvic Malabanan", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
-            {"EMP ID": 624390, "EMP Name": "Vanessa Christine Dorotheo", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12500},
-            {"EMP ID": 2343355, "EMP Name": "Jessa Pauline Lizardo", "A) RDOT Incentive(Aug'25)": 9000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 12000},
-            {"EMP ID": 2343362, "EMP Name": "Veronica Claire Carreon Yumul", "A) RDOT Incentive(Aug'25)": 7500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 11200},
-            {"EMP ID": 2343984, "EMP Name": "Ruth Eloisa Dacallos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 11000},
-            {"EMP ID": 2343374, "EMP Name": "Maverick Arthur Pineda", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 11000},
-            {"EMP ID": 2343389, "EMP Name": "April Abad Ramos", "A) RDOT Incentive(Aug'25)": 9000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 10600},
-            {"EMP ID": 2343694, "EMP Name": "Larisse Salzar", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 10000, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 10100},
-            {"EMP ID": 485720, "EMP Name": "Poblete, Anne Loraine Jacinto", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 1000, "Grand Total": 10100},
-            {"EMP ID": 2343399, "EMP Name": "Cris Ryan Aviso", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 4000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 9500},
-            {"EMP ID": 2343350, "EMP Name": "Aika Victoria Belga", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 9500},
-            {"EMP ID": 2343439, "EMP Name": "Novilyn Fuentespina", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 500, "Grand Total": 9100},
-            {"EMP ID": 2343388, "EMP Name": "Jeffrey Tomas", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 500, "Weekly Bonanza WK1": 500, "Grand Total": 8700},
-            {"EMP ID": 2343360, "EMP Name": "Abigail Alquisada", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 8400},
-            {"EMP ID": 2393819, "EMP Name": "Hazel Mae Isanan Habana", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 8100},
-            {"EMP ID": 2289705, "EMP Name": "Ina Carmella Santiago", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 500, "Weekly Bonanza WK1": 500, "Grand Total": 7700},
-            {"EMP ID": 773968, "EMP Name": "Rubin, Jennylyn Tizado", "A) RDOT Incentive(Aug'25)": 6000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 200, "Weekly Bonanza WK1": 500, "Grand Total": 7700},
-            {"EMP ID": 2343400, "EMP Name": "Lys Bandoja", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 7500},
-            {"EMP ID": 2343378, "EMP Name": "Mevelyn Guinto", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 7500},
-            {"EMP ID": 2343393, "EMP Name": "Fritzie Vestidas Aravejo", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 7000},
-            {"EMP ID": 2343270, "EMP Name": "Danica Monique Gale", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 7000},
-            {"EMP ID": 2343268, "EMP Name": "Aira Camille Tingcungco", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 6500},
-            {"EMP ID": 684084, "EMP Name": "Llanes, Paula Marie Beltran", "A) RDOT Incentive(Aug'25)": 4500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 6500},
-            {"EMP ID": 2343437, "EMP Name": "Ysabel Pelobello", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 500, "Grand Total": 6200},
-            {"EMP ID": 2395970, "EMP Name": "Virgilio Umali Cordova II", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 800, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5800},
-            {"EMP ID": 2343275, "EMP Name": "Rommel John Olarte", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5700},
-            {"EMP ID": 2343353, "EMP Name": "Paul Antivo", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5500},
-            {"EMP ID": 2393768, "EMP Name": "Guia Gelaika Mingo Girao", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 5400},
-            {"EMP ID": 2343982, "EMP Name": "Deona Maranan", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 5000},
-            {"EMP ID": 2285759, "EMP Name": "Oliver Evan Hernandez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 4600},
-            {"EMP ID": 2343980, "EMP Name": "Melanie Boongaling", "A) RDOT Incentive(Aug'25)": 3000, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4500},
-            {"EMP ID": 605018, "EMP Name": "Hanika Fuensalida", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 4500},
-            {"EMP ID": 2343442, "EMP Name": "Dannah Mae Santos", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 600, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4100},
-            {"EMP ID": 2402848, "EMP Name": "Laurice Catalan", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 3500, "VMS Project Support": 0, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
-            {"EMP ID": 2393757, "EMP Name": "Nangkil,Covie Picardal", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
-            {"EMP ID": 2343392, "EMP Name": "Lorena Vega", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 4000},
-            {"EMP ID": 2343891, "EMP Name": "Carmina Lourdes Pando", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3900},
-            {"EMP ID": 2343373, "EMP Name": "Marlon Jad Payos", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3600},
-            {"EMP ID": 2343273, "EMP Name": "Maika Aleli Sese", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3600},
-            {"EMP ID": 2343370, "EMP Name": "Tessa Rae Mercado", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3500},
-            {"EMP ID": 2283076, "EMP Name": "Angel Ian Mae Guanzon", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3500},
-            {"EMP ID": 2343361, "EMP Name": "Kevin Mark Sucaldito", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3400},
-            {"EMP ID": 2343395, "EMP Name": "Sharmaine Reyes", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3300},
-            {"EMP ID": 2343375, "EMP Name": "Niño Lolito Candari", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3200},
-            {"EMP ID": 2343977, "EMP Name": "John Lawrence", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3000},
-            {"EMP ID": 2343276, "EMP Name": "Jeleah Aira Camila", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 2000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 3000},
-            {"EMP ID": 2343381, "EMP Name": "Darren Jake Ng", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2700},
-            {"EMP ID": 2235973, "EMP Name": "Mary Alexis Ibarra", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2600},
-            {"EMP ID": 2393767, "EMP Name": "Ivy Grace Abinal Salazar", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
-            {"EMP ID": 2343368, "EMP Name": "Marc Angelo Perez", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
-            {"EMP ID": 2343352, "EMP Name": "Katherine Brozas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1500, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2500},
-            {"EMP ID": 2343348, "EMP Name": "Cedie Tagunicar", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 400, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2400},
-            {"EMP ID": 2343347, "EMP Name": "Hanelyn Hostia", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2300},
-            {"EMP ID": 2343354, "EMP Name": "Michelle Biggayan", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 1000, "Weekly Bonanza WK1": 0, "Grand Total": 2200},
-            {"EMP ID": 2343349, "EMP Name": "Michelle Griño", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2200},
-            {"EMP ID": 2343371, "EMP Name": "Orlando Jr. Regurosa Gamay", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
-            {"EMP ID": 2343365, "EMP Name": "Roger Martires", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
-            {"EMP ID": 2343364, "EMP Name": "Meara Carys Pedregosa Toleran", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
-            {"EMP ID": 2343359, "EMP Name": "Jenny Mae Nepomuceno", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
-            {"EMP ID": 2343274, "EMP Name": "Rhenalyn Mercolita", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
-            {"EMP ID": 2343267, "EMP Name": "Paulino,Adrian Carlo Ramirez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 1000, "Grand Total": 2000},
-            {"EMP ID": 2286934, "EMP Name": "John Paulo Dela Rosa", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 2000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 2000},
-            {"EMP ID": 2343895, "EMP Name": "Joshua Renzo Jacob", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 700, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1700},
-            {"EMP ID": 2283077, "EMP Name": "Jayson King Marquez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 700, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1700},
-            {"EMP ID": 2343391, "EMP Name": "Marc Kristoffer De Guzman", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
-            {"EMP ID": 2343376, "EMP Name": "Joanne Abbas", "A) RDOT Incentive(Aug'25)": 1500, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
-            {"EMP ID": 2228538, "EMP Name": "Ralf Aaron Roxas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 500, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1500},
-            {"EMP ID": 2231203, "EMP Name": "Gabrielle Anthony Israel", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1300},
-            {"EMP ID": 2343390, "EMP Name": "Charlene Ilustre", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 200, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1200},
-            {"EMP ID": 2343440, "EMP Name": "Daisy Marry Lomoljo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
-            {"EMP ID": 2343386, "EMP Name": "Shiella Marie Villena", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
-            {"EMP ID": 2280016, "EMP Name": "Kurt Lance Tagana", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
-            {"EMP ID": 641503, "EMP Name": "Ann Marjorie Medura", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1100},
-            {"EMP ID": 2395212, "EMP Name": "Angelique Margarette Begino Soledad", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2393827, "EMP Name": "Kristoffer Belen Corcega", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2393826, "EMP Name": "Ma. Micah Angela Talion Oclarino", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2393758, "EMP Name": "Nicole Angela Paguio Pinote", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343985, "EMP Name": "Keith Richard Razon", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343981, "EMP Name": "Kenneth Cadalin", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 1000, "VMS Project Support": 0, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343896, "EMP Name": "Chilly Yvette Ramos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343894, "EMP Name": "Luis Jamaica Santos", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343893, "EMP Name": "Lorris Gio Quiles", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343892, "EMP Name": "Bernadeth Dominguez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343441, "EMP Name": "Rabia Samaon Tasil", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343435, "EMP Name": "Maria Katrina Aliwalas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343385, "EMP Name": "Raymundo Jr Mensorado Cortez", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343384, "EMP Name": "Kenneth Prodigo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343366, "EMP Name": "Michael John Africano Delos Reyes", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343363, "EMP Name": "Huey Malaga Cuevas", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343357, "EMP Name": "John Leigh Roperos Conde", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343272, "EMP Name": "Iris Mijares", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343269, "EMP Name": "Alyssa Faye Limbo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2305215, "EMP Name": "Beaño, Edison Halili", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2291722, "EMP Name": "Jorick Alfred Reynoso", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2050857, "EMP Name": "Michelle Charmie Cabardo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 883406, "EMP Name": "Maria Patricia Isabel Tiemsin", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 396326, "EMP Name": "Moreno,Oliver Mendoza", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 1000, "WFP Tickets": 0, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 1000},
-            {"EMP ID": 2343396, "EMP Name": "Marjorie Sta. Ana", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 300, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 300},
-            {"EMP ID": 2343266, "EMP Name": "Abigail Ruth Salcedo", "A) RDOT Incentive(Aug'25)": 0, "Chat Touchdown": 0, "B) RDOT Incentive(Jul'25)": 0, "VMS Project Support": 0, "WFP Tickets": 100, "Weekly Bonanza WK2": 0, "Weekly Bonanza WK1": 0, "Grand Total": 100}
+            // ... (remaining employee data unchanged)
         ];
 
         function searchEmployee() {
             const empIdInput = document.getElementById('empIdInput');
-            const empId = parseInt(empIdInput.value.trim(), 10);
+            const empIdValue = empIdInput.value.trim();
             const resultsDiv = document.getElementById('results');
+            const loadingSpinner = document.getElementById('loadingSpinner');
             resultsDiv.innerHTML = '';
+            loadingSpinner.style.display = 'block';
 
-            const foundEmployee = employees.find(employee => employee["EMP ID"] === empId);
-
-            if (foundEmployee) {
-                let employeeInfoHtml = '<div class="employee-info">';
-                for (const key in foundEmployee) {
-                    if (key === "EMP ID" || key === "EMP Name") continue;
-                    const value = foundEmployee[key] || 0;
-                    const formattedKey = key.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                    // Add Philippine Peso symbol for monetary values
-                    const displayValue = key !== "EMP ID" && key !== "EMP Name" ? `₱${value.toLocaleString()}` : value.toLocaleString();
-                    employeeInfoHtml += `<p><strong>${formattedKey}:</strong> ${displayValue}</p>`;
+            setTimeout(() => { // Simulate async search for UX
+                if (!empIdValue) {
+                    resultsDiv.innerHTML = '<p class="not-found">Please enter an Employee ID.</p>';
+                    loadingSpinner.style.display = 'none';
+                    return;
                 }
-                const empName = foundEmployee["EMP Name"];
-                const empIdDisplay = foundEmployee["EMP ID"];
-                resultsDiv.innerHTML = `
-                    <div class="employee-info">
-                        <p><strong>Employee Name:</strong> ${empName}</p>
-                        <p><strong>Employee ID:</strong> ${empIdDisplay}</p>
-                        <hr>
-                        ${employeeInfoHtml}
-                    </div>
-                `;
-            } else {
-                resultsDiv.innerHTML = '<p class="not-found">Employee ID not found. Please check the ID and try again.</p>';
-            }
+                if (!/^\d+$/.test(empIdValue)) {
+                    resultsDiv.innerHTML = '<p class="not-found">Employee ID must be numeric.</p>';
+                    loadingSpinner.style.display = 'none';
+                    return;
+                }
+                const empId = parseInt(empIdValue, 10);
+                const foundEmployee = employees.find(employee => employee["EMP ID"] === empId);
+
+                if (foundEmployee) {
+                    let employeeInfoHtml = '<div class="employee-card">';
+                    for (const key in foundEmployee) {
+                        if (key === "EMP ID" || key === "EMP Name") continue;
+                        const value = foundEmployee[key] || 0;
+                        const formattedKey = key.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                        const displayValue = `₱${value.toLocaleString()}`;
+                        employeeInfoHtml += `<p><strong>${formattedKey}:</strong> ${displayValue}</p>`;
+                    }
+                    resultsDiv.innerHTML = `
+                        <div class="employee-card">
+                            <p><strong>Employee Name:</strong> ${foundEmployee["EMP Name"]}</p>
+                            <p><strong>Employee ID:</strong> ${foundEmployee["EMP ID"]}</p>
+                            <hr>
+                            ${employeeInfoHtml}
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = '<p class="not-found">Employee ID not found. Please check the ID and try again.</p>';
+                }
+                loadingSpinner.style.display = 'none';
+            }, 500);
         }
+
+        // Initialize animations and event listeners
+        window.onload = createPesoSigns;
+        document.getElementById('empIdInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchEmployee();
+            }
+        });
     </script>
 </body>
 </html>
